@@ -1,62 +1,194 @@
-/* src/styles.css */
+/* ====== Calculator UI (final) ====== */
+
+:root {
+  --bg: #0b0f17;
+  --card-border: #1f2937;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+
+  --btn: #1f2937;
+  --btn-hover: #273449;
+  --btn-active: #31435f;
+
+  --btn-secondary: #243041;
+  --btn-secondary-hover: #2c3b52;
+
+  --btn-op: #1d2a3a;
+  --btn-op-hover: #24364c;
+
+  --btn-eq: #2563eb;
+  --btn-eq-hover: #1d4ed8;
+  --btn-eq-active: #1e40af;
+
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --radius: 16px;
+}
+
+/* Background + center everything */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 600px at 20% 10%, #111827 0%, var(--bg) 55%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Calculator container */
 .calculator {
-  width: 320px;
-  margin: 40px auto;
-  border: 2px solid #333;
-  border-radius: 12px;
-  padding: 12px;
+  width: min(420px, 92vw);
+  margin: 0 auto;
+  padding: 14px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: var(--shadow);
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
+/* Display */
 .display {
-  border: 2px solid #333;
-  border-radius: 10px;
-  padding: 12px;
-  min-height: 70px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: calc(var(--radius) - 4px);
+  padding: 14px;
+  min-height: 84px;
   display: grid;
-  gap: 6px;
+  align-content: center;
   justify-items: end;
-  align-items: center;
+  gap: 8px;
+  overflow: hidden;
 }
 
-.previous {
-  opacity: 0.6;
+.display .previous {
+  color: var(--muted);
   font-size: 14px;
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.current {
-  font-size: 28px;
+.display .current {
+  color: var(--text);
+  font-size: clamp(26px, 7vw, 44px);
   font-weight: 700;
+  line-height: 1.05;
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ✅ Correct keypad layout */
 .keypad {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 12px;
+
+  /* Classic calculator layout */
+  grid-template-areas:
+    "c del div mul"
+    "seven eight nine sub"
+    "four five six add"
+    "one two three eq"
+    "zero zero dot eq";
 }
 
+/* Buttons */
 .btn {
-  height: 54px;
-  border-radius: 10px;
-  border: 2px solid #333;
-  background: rgb(68, 67, 67);
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: var(--btn);
+  color: var(--text);
   font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
+  user-select: none;
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
 }
 
+.btn:hover {
+  background: var(--btn-hover);
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+.btn:active {
+  background: var(--btn-active);
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.55);
+  outline-offset: 2px;
+}
+
+/* Variants */
 .btn-secondary {
-  background: #494747;
+  background: var(--btn-secondary);
+}
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover);
 }
 
 .btn-op {
-  background: #373737;
+  background: var(--btn-op);
+}
+.btn-op:hover {
+  background: var(--btn-op-hover);
 }
 
 .btn-equals {
-  background: #262726;
+  background: var(--btn-eq);
+  border-color: rgba(37, 99, 235, 0.55);
+}
+.btn-equals:hover {
+  background: var(--btn-eq-hover);
+}
+.btn-equals:active {
+  background: var(--btn-eq-active);
 }
 
-.span-2 {
-  grid-column: span 2;
+/* Grid area mapping */
+.a-c { grid-area: c; }
+.a-del { grid-area: del; }
+.a-div { grid-area: div; }
+.a-mul { grid-area: mul; }
+
+.a-seven { grid-area: seven; }
+.a-eight { grid-area: eight; }
+.a-nine { grid-area: nine; }
+.a-sub { grid-area: sub; }
+
+.a-four { grid-area: four; }
+.a-five { grid-area: five; }
+.a-six { grid-area: six; }
+.a-add { grid-area: add; }
+
+.a-one { grid-area: one; }
+.a-two { grid-area: two; }
+.a-three { grid-area: three; }
+
+.a-zero { grid-area: zero; }
+.a-dot { grid-area: dot; }
+.a-eq { grid-area: eq; }
+
+/* Responsive tweaks */
+@media (max-width: 360px) {
+  .calculator {
+    padding: 12px;
+    gap: 12px;
+  }
+  .keypad {
+    gap: 10px;
+  }
+  .btn {
+    height: 52px;
+    border-radius: 13px;
+  }
 }

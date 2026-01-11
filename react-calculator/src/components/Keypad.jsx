@@ -1,6 +1,4 @@
 // src/components/Keypad.jsx
-import Button from "./Button";
-
 export default function Keypad({
   onDigit,
   onDecimal,
@@ -11,28 +9,87 @@ export default function Keypad({
 }) {
   return (
     <div className="keypad">
-      <Button variant="secondary" onClick={onClear} label="C" />
-      <Button variant="secondary" onClick={onDelete} label="DEL" />
-      <Button variant="op" onClick={() => onOperation("÷")} label="÷" />
+      {/* Row 1 */}
+      <button className="btn btn-secondary a-c" onClick={onClear} type="button">
+        C
+      </button>
+      <button className="btn btn-secondary a-del" onClick={onDelete} type="button">
+        DEL
+      </button>
+      <button
+        className="btn btn-op a-div"
+        onClick={() => onOperation("÷")}
+        type="button"
+      >
+        ÷
+      </button>
+      <button
+        className="btn btn-op a-mul"
+        onClick={() => onOperation("×")}
+        type="button"
+      >
+        ×
+      </button>
 
-      <Button onClick={() => onDigit("7")} label="7" />
-      <Button onClick={() => onDigit("8")} label="8" />
-      <Button onClick={() => onDigit("9")} label="9" />
-      <Button variant="op" onClick={() => onOperation("×")} label="×" />
+      {/* Row 2 */}
+      <button className="btn a-seven" onClick={() => onDigit("7")} type="button">
+        7
+      </button>
+      <button className="btn a-eight" onClick={() => onDigit("8")} type="button">
+        8
+      </button>
+      <button className="btn a-nine" onClick={() => onDigit("9")} type="button">
+        9
+      </button>
+      <button
+        className="btn btn-op a-sub"
+        onClick={() => onOperation("-")}
+        type="button"
+      >
+        −
+      </button>
 
-      <Button onClick={() => onDigit("4")} label="4" />
-      <Button onClick={() => onDigit("5")} label="5" />
-      <Button onClick={() => onDigit("6")} label="6" />
-      <Button variant="op" onClick={() => onOperation("-")} label="-" />
+      {/* Row 3 */}
+      <button className="btn a-four" onClick={() => onDigit("4")} type="button">
+        4
+      </button>
+      <button className="btn a-five" onClick={() => onDigit("5")} type="button">
+        5
+      </button>
+      <button className="btn a-six" onClick={() => onDigit("6")} type="button">
+        6
+      </button>
+      <button
+        className="btn btn-op a-add"
+        onClick={() => onOperation("+")}
+        type="button"
+      >
+        +
+      </button>
 
-      <Button onClick={() => onDigit("1")} label="1" />
-      <Button onClick={() => onDigit("2")} label="2" />
-      <Button onClick={() => onDigit("3")} label="3" />
-      <Button variant="op" onClick={() => onOperation("+")} label="+" />
+      {/* Row 4 */}
+      <button className="btn a-one" onClick={() => onDigit("1")} type="button">
+        1
+      </button>
+      <button className="btn a-two" onClick={() => onDigit("2")} type="button">
+        2
+      </button>
+      <button className="btn a-three" onClick={() => onDigit("3")} type="button">
+        3
+      </button>
 
-      <Button className="span-2" onClick={() => onDigit("0")} label="0" />
-      <Button onClick={onDecimal} label="." />
-      <Button variant="equals" onClick={onEquals} label="=" />
+      {/* "=" occupies row 4 + row 5 (tall button) */}
+      <button className="btn btn-equals a-eq" onClick={onEquals} type="button">
+        =
+      </button>
+
+      {/* Row 5 */}
+      <button className="btn a-zero" onClick={() => onDigit("0")} type="button">
+        0
+      </button>
+      <button className="btn a-dot" onClick={onDecimal} type="button">
+        .
+      </button>
     </div>
   );
 }
